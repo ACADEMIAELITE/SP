@@ -1,0 +1,1969 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Academia Elite | Transforme Seu Corpo</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bai+Jamjuree:wght@600;700&family=Exo+2:wght@300;400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #00FFAA;
+            --secondary: #AA00FF;
+            --accent: #FF00AA;
+            --dark: #0A0A0A;
+            --darker: #050505;
+            --gray: #1A1A1A;
+            --light: #F0F0F0;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Exo 2', sans-serif;
+            background-color: var(--dark);
+            color: var(--light);
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 20% 30%, rgba(0, 255, 170, 0.05) 0%, transparent 20%), 
+                          radial-gradient(circle at 80% 70%, rgba(170, 0, 255, 0.05) 0%, transparent 20%);
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        /* Navbar Revolucionária */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 20px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            transition: all 0.5s ease;
+            backdrop-filter: blur(10px);
+            background-color: rgba(10, 10, 10, 0.7);
+            border-bottom: 1px solid rgba(0, 255, 170, 0.1);
+        }
+
+        .navbar.scrolled {
+            padding: 15px 5%;
+            background-color: rgba(10, 10, 10, 0.95);
+            box-shadow: 0 5px 30px rgba(0, 255, 170, 0.1);
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            position: relative;
+            z-index: 1001;
+        }
+
+        .logo-text {
+            font-family: 'Bai Jamjuree', sans-serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--primary);
+            text-decoration: none;
+            position: relative;
+            padding: 0 10px;
+        }
+
+        .logo-text::before {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 10px;
+            width: calc(100% - 20px);
+            height: 2px;
+            background: linear-gradient(90deg, var(--primary), transparent);
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.5s ease;
+        }
+
+        .logo-text:hover::before {
+            transform: scaleX(1);
+        }
+
+        .logo-circle {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background-color: var(--accent);
+            margin-right: 10px;
+            box-shadow: 0 0 10px var(--accent), 0 0 20px var(--accent);
+            animation: pulse 2s infinite alternate;
+        }
+
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+                box-shadow: 0 0 10px var(--accent), 0 0 20px var(--accent);
+            }
+            100% {
+                transform: scale(1.2);
+                box-shadow: 0 0 15px var(--accent), 0 0 30px var(--accent);
+            }
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 30px;
+        }
+
+        .nav-item {
+            position: relative;
+            list-style: none;
+        }
+
+        .nav-link {
+            color: var(--light);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 1.1rem;
+            position: relative;
+            padding: 5px 0;
+            transition: color 0.3s ease;
+        }
+
+        .nav-link::before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            transition: width 0.3s ease;
+        }
+
+        .nav-link:hover {
+            color: var(--primary);
+        }
+
+        .nav-link:hover::before {
+            width: 100%;
+        }
+
+        .nav-item:hover .nav-dropdown {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .nav-dropdown {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background-color: var(--gray);
+            border-radius: 5px;
+            padding: 15px;
+            min-width: 200px;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(10px);
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(0, 255, 170, 0.1);
+        }
+
+        .dropdown-item {
+            margin-bottom: 10px;
+        }
+
+        .dropdown-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .dropdown-link {
+            color: var(--light);
+            text-decoration: none;
+            transition: color 0.3s ease;
+            display: block;
+            padding: 5px 0;
+        }
+
+        .dropdown-link:hover {
+            color: var(--primary);
+        }
+
+        .nav-cta {
+            background: linear-gradient(45deg, var(--primary), var(--secondary));
+            color: var(--dark);
+            padding: 10px 25px;
+            border-radius: 30px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0, 255, 170, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .nav-cta::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: all 0.5s ease;
+        }
+
+        .nav-cta:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(0, 255, 170, 0.5);
+        }
+
+        .nav-cta:hover::before {
+            left: 100%;
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--light);
+            font-size: 1.5rem;
+            cursor: pointer;
+            z-index: 1001;
+        }
+
+        /* Hero Section Impactante */
+        .hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            padding: 0 5%;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 70% 20%, rgba(0, 255, 170, 0.1) 0%, transparent 30%),
+                        radial-gradient(circle at 30% 80%, rgba(170, 0, 255, 0.1) 0%, transparent 30%);
+            z-index: -1;
+        }
+
+        .hero-content {
+            max-width: 600px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-title {
+            font-family: 'Bai Jamjuree', sans-serif;
+            font-size: 4rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            line-height: 1.2;
+            background: linear-gradient(45deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-shadow: 0 0 20px rgba(0, 255, 170, 0.3);
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInUp 1s ease forwards 0.3s;
+        }
+
+        .hero-subtitle {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+            color: rgba(255, 255, 255, 0.8);
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInUp 1s ease forwards 0.6s;
+        }
+
+        .hero-cta {
+            display: inline-block;
+            background: linear-gradient(45deg, var(--primary), var(--secondary));
+            color: var(--dark);
+            padding: 15px 40px;
+            border-radius: 30px;
+            font-weight: 600;
+            text-decoration: none;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 25px rgba(0, 255, 170, 0.4);
+            position: relative;
+            overflow: hidden;
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInUp 1s ease forwards 0.9s;
+        }
+
+        .hero-cta::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            transition: all 0.7s ease;
+        }
+
+        .hero-cta:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 35px rgba(0, 255, 170, 0.6);
+        }
+
+        .hero-cta:hover::before {
+            left: 100%;
+        }
+
+        .hero-image {
+            position: absolute;
+            right: 5%;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 40%;
+            max-width: 600px;
+            opacity: 0;
+            animation: fadeIn 1s ease forwards 1.2s;
+        }
+
+        .hero-image img {
+            width: 100%;
+            height: auto;
+            filter: drop-shadow(0 0 20px rgba(0, 255, 170, 0.3));
+        }
+
+        .floating-elements {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .floating-element {
+            position: absolute;
+            border-radius: 50%;
+            background: linear-gradient(45deg, var(--primary), var(--secondary));
+            opacity: 0.1;
+            filter: blur(20px);
+        }
+
+        .floating-element:nth-child(1) {
+            width: 300px;
+            height: 300px;
+            top: 20%;
+            left: 10%;
+            animation: float 15s infinite ease-in-out;
+        }
+
+        .floating-element:nth-child(2) {
+            width: 200px;
+            height: 200px;
+            top: 60%;
+            left: 70%;
+            animation: float 12s infinite ease-in-out reverse;
+        }
+
+        .floating-element:nth-child(3) {
+            width: 150px;
+            height: 150px;
+            top: 80%;
+            left: 20%;
+            animation: float 10s infinite ease-in-out;
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0) translateX(0);
+            }
+            50% {
+                transform: translateY(-20px) translateX(10px);
+            }
+        }
+
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeIn {
+            to {
+                opacity: 1;
+            }
+        }
+
+        /* Seção de Destaques */
+        .highlights {
+            padding: 100px 5%;
+            background-color: var(--darker);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .section-title {
+            font-family: 'Bai Jamjuree', sans-serif;
+            font-size: 2.5rem;
+            text-align: center;
+            margin-bottom: 60px;
+            position: relative;
+            display: inline-block;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            border-radius: 3px;
+        }
+
+        .highlight-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+
+        .highlight-card {
+            background: rgba(26, 26, 26, 0.5);
+            border-radius: 15px;
+            padding: 40px 30px;
+            text-align: center;
+            transition: all 0.5s ease;
+            position: relative;
+            overflow: hidden;
+            border: 1px solid rgba(0, 255, 170, 0.1);
+            backdrop-filter: blur(10px);
+            opacity: 0;
+            transform: translateY(50px);
+        }
+
+        .highlight-card:nth-child(1) {
+            animation: fadeInUpCard 1s ease forwards 0.3s;
+        }
+
+        .highlight-card:nth-child(2) {
+            animation: fadeInUpCard 1s ease forwards 0.6s;
+        }
+
+        .highlight-card:nth-child(3) {
+            animation: fadeInUpCard 1s ease forwards 0.9s;
+        }
+
+        @keyframes fadeInUpCard {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .highlight-card::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            background: linear-gradient(45deg, var(--primary), var(--secondary));
+            z-index: -1;
+            border-radius: 16px;
+            opacity: 0;
+            transition: opacity 0.5s ease;
+        }
+
+        .highlight-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .highlight-card:hover::before {
+            opacity: 0.3;
+        }
+
+        .card-icon {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            background: linear-gradient(45deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .card-title {
+            font-family: 'Bai Jamjuree', sans-serif;
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            color: var(--primary);
+        }
+
+        .card-text {
+            color: rgba(255, 255, 255, 0.7);
+            line-height: 1.6;
+        }
+
+        /* Seção de Serviços */
+        .services {
+            padding: 100px 5%;
+            position: relative;
+        }
+
+        .services::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 30% 50%, rgba(0, 255, 170, 0.05) 0%, transparent 30%),
+                        radial-gradient(circle at 70% 50%, rgba(170, 0, 255, 0.05) 0%, transparent 30%);
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .service-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 40px;
+            margin-top: 50px;
+        }
+
+        .service-card {
+            background: rgba(26, 26, 26, 0.7);
+            border-radius: 20px;
+            overflow: hidden;
+            transition: all 0.5s ease;
+            position: relative;
+            border: 1px solid rgba(0, 255, 170, 0.1);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            opacity: 0;
+            transform: perspective(1000px) rotateY(20deg) translateY(50px);
+        }
+
+        .service-card:nth-child(1) {
+            animation: fadeInRotateCard 1s ease forwards 0.3s;
+        }
+
+        .service-card:nth-child(2) {
+            animation: fadeInRotateCard 1s ease forwards 0.6s;
+        }
+
+        .service-card:nth-child(3) {
+            animation: fadeInRotateCard 1s ease forwards 0.9s;
+        }
+
+        @keyframes fadeInRotateCard {
+            to {
+                opacity: 1;
+                transform: perspective(1000px) rotateY(0) translateY(0);
+            }
+        }
+
+        .service-card:hover {
+            transform: perspective(1000px) rotateY(0) translateY(-10px);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4);
+        }
+
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+        }
+
+        .service-card-image {
+            height: 200px;
+            overflow: hidden;
+        }
+
+        .service-card-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .service-card:hover .service-card-image img {
+            transform: scale(1.1);
+        }
+
+        .service-card-content {
+            padding: 30px;
+        }
+
+        .service-card-title {
+            font-family: 'Bai Jamjuree', sans-serif;
+            font-size: 1.8rem;
+            margin-bottom: 15px;
+            color: var(--light);
+        }
+
+        .service-card-text {
+            color: rgba(255, 255, 255, 0.7);
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+
+        .service-card-price {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--primary);
+            margin-bottom: 20px;
+        }
+
+        .service-card-button {
+            display: inline-block;
+            padding: 10px 25px;
+            background: linear-gradient(45deg, var(--primary), var(--secondary));
+            color: var(--dark);
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+        }
+
+        .service-card-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 255, 170, 0.4);
+        }
+
+        /* Seção de Treinadores */
+        .trainers {
+            padding: 100px 5%;
+            background-color: var(--darker);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .trainers::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 50% 30%, rgba(0, 255, 170, 0.05) 0%, transparent 30%);
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .trainer-cards {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 40px;
+            margin-top: 50px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .trainer-card {
+            width: 300px;
+            perspective: 1000px;
+            opacity: 0;
+            transform: translateY(50px);
+        }
+
+        .trainer-card:nth-child(1) {
+            animation: fadeInUp 1s ease forwards 0.3s;
+        }
+
+        .trainer-card:nth-child(2) {
+            animation: fadeInUp 1s ease forwards 0.6s;
+        }
+
+        .trainer-card:nth-child(3) {
+            animation: fadeInUp 1s ease forwards 0.9s;
+        }
+
+        .trainer-card-inner {
+            position: relative;
+            width: 100%;
+            height: 400px;
+            transition: transform 0.8s;
+            transform-style: preserve-3d;
+        }
+
+        .trainer-card:hover .trainer-card-inner {
+            transform: rotateY(180deg);
+        }
+
+        .trainer-card-front, .trainer-card-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .trainer-card-front {
+            background-color: var(--gray);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 30px;
+            text-align: center;
+        }
+
+        .trainer-card-image {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            overflow: hidden;
+            margin-bottom: 20px;
+            border: 3px solid var(--primary);
+            box-shadow: 0 0 20px rgba(0, 255, 170, 0.3);
+        }
+
+        .trainer-card-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .trainer-card-name {
+            font-family: 'Bai Jamjuree', sans-serif;
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+            color: var(--primary);
+        }
+
+        .trainer-card-specialty {
+            color: var(--secondary);
+            font-weight: 500;
+            margin-bottom: 15px;
+        }
+
+        .trainer-card-social {
+            display: flex;
+            gap: 15px;
+        }
+
+        .social-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+
+        .social-icon:hover {
+            background-color: var(--primary);
+            transform: translateY(-3px);
+        }
+
+        .trainer-card-back {
+            background: linear-gradient(45deg, var(--darker), var(--gray));
+            transform: rotateY(180deg);
+            padding: 30px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .trainer-card-bio {
+            color: rgba(255, 255, 255, 0.8);
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        .trainer-card-stats {
+            margin-bottom: 20px;
+        }
+
+        .stat-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+        }
+
+        .stat-name {
+            color: var(--primary);
+        }
+
+        .stat-value {
+            color: var(--light);
+        }
+
+        .trainer-card-button {
+            display: inline-block;
+            padding: 10px 25px;
+            background: linear-gradient(45deg, var(--primary), var(--secondary));
+            color: var(--dark);
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .trainer-card-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 255, 170, 0.4);
+        }
+
+        /* Seção de Depoimentos */
+        .testimonials {
+            padding: 100px 5%;
+            position: relative;
+        }
+
+        .testimonials::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 70% 30%, rgba(170, 0, 255, 0.05) 0%, transparent 30%);
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .testimonial-slider {
+            max-width: 1000px;
+            margin: 50px auto 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .testimonial-slide {
+            background: rgba(26, 26, 26, 0.7);
+            border-radius: 15px;
+            padding: 40px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            border: 1px solid rgba(0, 255, 170, 0.1);
+            opacity: 0;
+            transform: scale(0.9);
+            transition: all 0.5s ease;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        .testimonial-slide.active {
+            opacity: 1;
+            transform: scale(1);
+            position: relative;
+        }
+
+        .testimonial-quote {
+            font-size: 1.2rem;
+            line-height: 1.8;
+            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: 30px;
+            position: relative;
+        }
+
+        .testimonial-quote::before, .testimonial-quote::after {
+            content: '"';
+            font-size: 3rem;
+            color: var(--primary);
+            opacity: 0.3;
+            position: absolute;
+        }
+
+        .testimonial-quote::before {
+            top: -20px;
+            left: -20px;
+        }
+
+        .testimonial-quote::after {
+            bottom: -40px;
+            right: -20px;
+        }
+
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        .testimonial-author-image {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            overflow: hidden;
+            border: 2px solid var(--primary);
+        }
+
+        .testimonial-author-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .testimonial-author-info {
+            text-align: left;
+        }
+
+        .testimonial-author-name {
+            font-family: 'Bai Jamjuree', sans-serif;
+            font-size: 1.2rem;
+            color: var(--primary);
+            margin-bottom: 5px;
+        }
+
+        .testimonial-author-role {
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 0.9rem;
+        }
+
+        .testimonial-nav {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 30px;
+        }
+
+        .testimonial-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.3);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .testimonial-dot.active {
+            background-color: var(--primary);
+            transform: scale(1.2);
+        }
+
+        /* Seção de Contato */
+        .contact {
+            padding: 100px 5%;
+            background-color: var(--darker);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .contact::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 30% 70%, rgba(0, 255, 170, 0.05) 0%, transparent 30%),
+                        radial-gradient(circle at 70% 30%, rgba(255, 0, 170, 0.05) 0%, transparent 30%);
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .contact-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 50px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .contact-info {
+            opacity: 0;
+            transform: translateX(-50px);
+            animation: fadeInLeft 1s ease forwards 0.3s;
+        }
+
+        @keyframes fadeInLeft {
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .contact-title {
+            font-family: 'Bai Jamjuree', sans-serif;
+            font-size: 2rem;
+            color: var(--primary);
+            margin-bottom: 20px;
+        }
+
+        .contact-text {
+            color: rgba(255, 255, 255, 0.7);
+            line-height: 1.6;
+            margin-bottom: 30px;
+        }
+
+        .contact-details {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .contact-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: linear-gradient(45deg, var(--primary), var(--secondary));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            color: var(--dark);
+        }
+
+        .contact-label {
+            color: var(--primary);
+            font-weight: 500;
+            margin-bottom: 5px;
+        }
+
+        .contact-value {
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        .contact-form {
+            background: rgba(26, 26, 26, 0.7);
+            border-radius: 15px;
+            padding: 40px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            border: 1px solid rgba(0, 255, 170, 0.1);
+            opacity: 0;
+            transform: translateX(50px);
+            animation: fadeInRight 1s ease forwards 0.3s;
+        }
+
+        @keyframes fadeInRight {
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+            position: relative;
+        }
+
+        .form-label {
+            display: block;
+            margin-bottom: 8px;
+            color: var(--light);
+            font-weight: 500;
+        }
+
+        .form-input, .form-textarea {
+            width: 100%;
+            padding: 12px 15px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 5px;
+            color: var(--light);
+            font-family: 'Exo 2', sans-serif;
+            transition: all 0.3s ease;
+        }
+
+        .form-input:focus, .form-textarea:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 2px rgba(0, 255, 170, 0.2);
+        }
+
+        .form-textarea {
+            min-height: 150px;
+            resize: vertical;
+        }
+
+        .form-button {
+            display: inline-block;
+            padding: 12px 30px;
+            background: linear-gradient(45deg, var(--primary), var(--secondary));
+            color: var(--dark);
+            border: none;
+            border-radius: 30px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 100%;
+        }
+
+        .form-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 255, 170, 0.4);
+        }
+
+        /* Footer */
+        .footer {
+            background-color: var(--darker);
+            padding: 50px 5% 20px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--primary), transparent);
+        }
+
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-logo {
+            font-family: 'Bai Jamjuree', sans-serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--primary);
+            text-decoration: none;
+            margin-bottom: 20px;
+            display: inline-block;
+        }
+
+        .footer-text {
+            color: rgba(255, 255, 255, 0.6);
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        .footer-social {
+            display: flex;
+            gap: 15px;
+        }
+
+        .footer-social-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+
+        .footer-social-icon:hover {
+            background-color: var(--primary);
+            transform: translateY(-3px);
+        }
+
+        .footer-title {
+            font-family: 'Bai Jamjuree', sans-serif;
+            font-size: 1.3rem;
+            color: var(--light);
+            margin-bottom: 20px;
+            position: relative;
+        }
+
+        .footer-title::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 0;
+            width: 40px;
+            height: 2px;
+            background: linear-gradient(90deg, var(--primary), transparent);
+        }
+
+        .footer-links {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .footer-link {
+            color: rgba(255, 255, 255, 0.6);
+            text-decoration: none;
+            transition: all 0.3s ease;
+            position: relative;
+            padding-left: 15px;
+        }
+
+        .footer-link::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background-color: var(--primary);
+            opacity: 0;
+            transition: all 0.3s ease;
+        }
+
+        .footer-link:hover {
+            color: var(--primary);
+            padding-left: 20px;
+        }
+
+        .footer-link:hover::before {
+            opacity: 1;
+        }
+
+        .footer-newsletter-form {
+            display: flex;
+            margin-bottom: 20px;
+        }
+
+        .footer-newsletter-input {
+            flex: 1;
+            padding: 10px 15px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 5px 0 0 5px;
+            color: var(--light);
+            font-family: 'Exo 2', sans-serif;
+        }
+
+        .footer-newsletter-input:focus {
+            outline: none;
+            border-color: var(--primary);
+        }
+
+        .footer-newsletter-button {
+            padding: 0 20px;
+            background: linear-gradient(45deg, var(--primary), var(--secondary));
+            color: var(--dark);
+            border: none;
+            border-radius: 0 5px 5px 0;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .footer-newsletter-button:hover {
+            opacity: 0.9;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: rgba(255, 255, 255, 0.4);
+            font-size: 0.9rem;
+        }
+
+        /* Efeitos de Cursor */
+        .cursor {
+            position: fixed;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background-color: var(--primary);
+            mix-blend-mode: screen;
+            pointer-events: none;
+            transform: translate(-50%, -50%);
+            z-index: 9999;
+            opacity: 0.5;
+            transition: transform 0.1s ease;
+        }
+
+        .cursor-follower {
+            position: fixed;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            border: 1px solid var(--primary);
+            pointer-events: none;
+            transform: translate(-50%, -50%);
+            z-index: 9998;
+            transition: transform 0.3s ease, width 0.3s ease, height 0.3s ease;
+            opacity: 0.3;
+        }
+
+        /* Responsividade */
+        @media (max-width: 1024px) {
+            .hero-title {
+                font-size: 3rem;
+            }
+            
+            .hero-image {
+                width: 45%;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .navbar {
+                padding: 15px 5%;
+            }
+            
+            .nav-links {
+                position: fixed;
+                top: 0;
+                right: -100%;
+                width: 80%;
+                max-width: 300px;
+                height: 100vh;
+                background-color: var(--darker);
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                gap: 30px;
+                transition: right 0.5s ease;
+                z-index: 1000;
+                box-shadow: -5px 0 30px rgba(0, 0, 0, 0.3);
+            }
+            
+            .nav-links.active {
+                right: 0;
+            }
+            
+            .mobile-menu-btn {
+                display: block;
+            }
+            
+            .hero {
+                flex-direction: column;
+                justify-content: center;
+                text-align: center;
+                padding-top: 100px;
+            }
+            
+            .hero-content {
+                max-width: 100%;
+                margin-bottom: 50px;
+            }
+            
+            .hero-image {
+                position: relative;
+                right: auto;
+                top: auto;
+                transform: none;
+                width: 80%;
+                margin: 0 auto;
+            }
+            
+            .service-cards {
+                grid-template-columns: 1fr;
+            }
+            
+            .trainer-cards {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .contact-container {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero-title {
+                font-size: 2.5rem;
+            }
+            
+            .hero-subtitle {
+                font-size: 1rem;
+            }
+            
+            .section-title {
+                font-size: 2rem;
+            }
+            
+            .highlight-cards {
+                grid-template-columns: 1fr;
+            }
+            
+            .service-card {
+                min-width: 100%;
+            }
+            
+            .testimonial-slide {
+                padding: 30px 20px;
+            }
+            
+            .testimonial-quote {
+                font-size: 1rem;
+            }
+            
+            .footer-container {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar Revolucionária -->
+    <nav class="navbar">
+        <a href="#" class="logo">
+            <div class="logo-circle"></div>
+            <span class="logo-text">ACADEMIA ELITE</span>
+        </a>
+        
+        <button class="mobile-menu-btn" id="mobileMenuBtn">☰</button>
+        
+        <ul class="nav-links" id="navLinks">
+            <li class="nav-item">
+                <a href="#" class="nav-link">Início</a>
+            </li>
+            <li class="nav-item">
+                <a href="#services" class="nav-link">Serviços</a>
+                <ul class="nav-dropdown">
+                    <li class="dropdown-item">
+                        <a href="#" class="dropdown-link">Musculação</a>
+                    </li>
+                    <li class="dropdown-item">
+                        <a href="#" class="dropdown-link">CrossFit</a>
+                    </li>
+                    <li class="dropdown-item">
+                        <a href="#" class="dropdown-link">Yoga</a>
+                    </li>
+                    <li class="dropdown-item">
+                        <a href="#" class="dropdown-link">Personal Trainer</a>
+                    </li>
+                </ul>
+            </li>
+            <li class="nav-item">
+                <a href="#trainers" class="nav-link">Treinadores</a>
+            </li>
+            <li class="nav-item">
+                <a href="#testimonials" class="nav-link">Depoimentos</a>
+            </li>
+            <li class="nav-item">
+                <a href="#contact" class="nav-link">Contato</a>
+            </li>
+            <li class="nav-item">
+                <a href="#" class="nav-cta">Matricule-se</a>
+            </li>
+        </ul>
+    </nav>
+    
+    <!-- Hero Section Impactante -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1 class="hero-title">TRANSFORME SEU CORPO, ELEVE SEU ESPÍRITO</h1>
+            <p class="hero-subtitle">Na Academia Elite, oferecemos treinamento de ponta com tecnologia de última geração para ajudar você a alcançar seus objetivos fitness.</p>
+            <a href="#" class="hero-cta">COMEÇAR AGORA</a>
+        </div>
+        
+        <div class="hero-image">
+            <img src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" alt="Atleta fitness">
+        </div>
+        
+        <div class="floating-elements">
+            <div class="floating-element"></div>
+            <div class="floating-element"></div>
+            <div class="floating-element"></div>
+        </div>
+    </section>
+    
+    <!-- Seção de Destaques -->
+    <section class="highlights">
+        <h2 class="section-title">NOSSO DIFERENCIAL</h2>
+        
+        <div class="highlight-cards">
+            <div class="highlight-card">
+                <div class="card-icon">💪</div>
+                <h3 class="card-title">Equipamentos Modernos</h3>
+                <p class="card-text">Máquinas de última geração importadas dos EUA e Europa para garantir o melhor desempenho em seus treinos.</p>
+            </div>
+            
+            <div class="highlight-card">
+                <div class="card-icon">🧠</div>
+                <h3 class="card-title">Treinadores Certificados</h3>
+                <p class="card-text">Nossa equipe de profissionais possui certificações internacionais e anos de experiência no mercado fitness.</p>
+            </div>
+            
+            <div class="highlight-card">
+                <div class="card-icon">❤️</div>
+                <h3 class="card-title">Ambiente Acolhedor</h3>
+                <p class="card-text">Espaço projetado para seu conforto e bem-estar, com climatização e música ambiente selecionada.</p>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Seção de Serviços -->
+    <section class="services" id="services">
+        <h2 class="section-title">NOSSOS SERVIÇOS</h2>
+        
+        <div class="service-cards">
+            <div class="service-card">
+                <div class="service-card-image">
+                    <img src="https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" alt="Musculação">
+                </div>
+                <div class="service-card-content">
+                    <h3 class="service-card-title">Musculação Premium</h3>
+                    <p class="service-card-text">Acesso ilimitado à nossa área de musculação com equipamentos de última geração e acompanhamento personalizado.</p>
+                    <p class="service-card-price">R$ 199/mês</p>
+                    <button class="service-card-button">Saiba Mais</button>
+                </div>
+            </div>
+            
+            <div class="service-card">
+                <div class="service-card-image">
+                    <img src="https://images.unsplash.com/photo-1538805060514-97d9cc17730c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" alt="CrossFit">
+                </div>
+                <div class="service-card-content">
+                    <h3 class="service-card-title">CrossFit Elite</h3>
+                    <p class="service-card-text">Treinos em grupo de alta intensidade com coaches certificados para maximizar seus resultados.</p>
+                    <p class="service-card-price">R$ 299/mês</p>
+                    <button class="service-card-button">Saiba Mais</button>
+                </div>
+            </div>
+            
+            <div class="service-card">
+                <div class="service-card-image">
+                    <img src="https://images.unsplash.com/photo-1545389336-cf090694435e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" alt="Personal Trainer">
+                </div>
+                <div class="service-card-content">
+                    <h3 class="service-card-title">Personal Trainer</h3>
+                    <p class="service-card-text">Programas 100% personalizados com acompanhamento individual para atingir seus objetivos específicos.</p>
+                    <p class="service-card-price">R$ 399/mês</p>
+                    <button class="service-card-button">Saiba Mais</button>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Seção de Treinadores -->
+    <section class="trainers" id="trainers">
+        <h2 class="section-title">NOSSOS TREINADORES</h2>
+        
+        <div class="trainer-cards">
+            <div class="trainer-card">
+                <div class="trainer-card-inner">
+                    <div class="trainer-card-front">
+                        <div class="trainer-card-image">
+                            <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" alt="Treinador 1">
+                        </div>
+                        <h3 class="trainer-card-name">Marcos Silva</h3>
+                        <p class="trainer-card-specialty">Especialista em Hipertrofia</p>
+                        <div class="trainer-card-social">
+                            <a href="#" class="social-icon">📱</a>
+                            <a href="#" class="social-icon">📘</a>
+                            <a href="#" class="social-icon">📸</a>
+                        </div>
+                    </div>
+                    <div class="trainer-card-back">
+                        <p class="trainer-card-bio">Com 10 anos de experiência em treinamento de força, Marcos já ajudou mais de 200 alunos a alcançarem seus objetivos de ganho de massa muscular.</p>
+                        <div class="trainer-card-stats">
+                            <div class="stat-item">
+                                <span class="stat-name">Certificação:</span>
+                                <span class="stat-value">NSCA-CPT</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-name">Experiência:</span>
+                                <span class="stat-value">10 anos</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-name">Especialidade:</span>
+                                <span class="stat-value">Hipertrofia</span>
+                            </div>
+                        </div>
+                        <a href="#" class="trainer-card-button">Agendar Aula</a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="trainer-card">
+                <div class="trainer-card-inner">
+                    <div class="trainer-card-front">
+                        <div class="trainer-card-image">
+                            <img src="https://images.unsplash.com/photo-1594381898411-846e7d193883?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" alt="Treinador 2">
+                        </div>
+                        <h3 class="trainer-card-name">Ana Costa</h3>
+                        <p class="trainer-card-specialty">Especialista em CrossFit</p>
+                        <div class="trainer-card-social">
+                            <a href="#" class="social-icon">📱</a>
+                            <a href="#" class="social-icon">📘</a>
+                            <a href="#" class="social-icon">📸</a>
+                        </div>
+                    </div>
+                    <div class="trainer-card-back">
+                        <p class="trainer-card-bio">Ana é coach de CrossFit nível 3 e já competiu em diversos campeonatos nacionais. Sua paixão é ajudar alunos a superarem seus limites.</p>
+                        <div class="trainer-card-stats">
+                            <div class="stat-item">
+                                <span class="stat-name">Certificação:</span>
+                                <span class="stat-value">CF-L3</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-name">Experiência:</span>
+                                <span class="stat-value">7 anos</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-name">Especialidade:</span>
+                                <span class="stat-value">CrossFit</span>
+                            </div>
+                        </div>
+                        <a href="#" class="trainer-card-button">Agendar Aula</a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="trainer-card">
+                <div class="trainer-card-inner">
+                    <div class="trainer-card-front">
+                        <div class="trainer-card-image">
+                            <img src="https://images.unsplash.com/photo-1583864697784-a0efc8379f70?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80"  alt="Treinador 3">
+                        </div>
+                        <h3 class="trainer-card-name">Carlos Mendes</h3>
+                        <p class="trainer-card-specialty">Especialista em Mobilidade</p>
+                        <div class="trainer-card-social">
+                            <a href="#" class="social-icon">📱</a>
+                            <a href="#" class="social-icon">📘</a>
+                            <a href="#" class="social-icon">📸</a>
+                        </div>
+                    </div>
+                    <div class="trainer-card-back">
+                        <p class="trainer-card-bio">Fisioterapeuta e treinador, Carlos combina conhecimentos de reabilitação com treinamento funcional para melhorar mobilidade e prevenir lesões.</p>
+                        <div class="trainer-card-stats">
+                            <div class="stat-item">
+                                <span class="stat-name">Certificação:</span>
+                                <span class="stat-value">DPT, NASM-CPT</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-name">Experiência:</span>
+                                <span class="stat-value">12 anos</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-name">Especialidade:</span>
+                                <span class="stat-value">Mobilidade</span>
+                            </div>
+                        </div>
+                        <a href="#" class="trainer-card-button">Agendar Aula</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Seção de Depoimentos -->
+    <section class="testimonials" id="testimonials">
+        <h2 class="section-title">DEPOIMENTOS</h2>
+        
+        <div class="testimonial-slider">
+            <div class="testimonial-slide active">
+                <p class="testimonial-quote">A Academia Elite mudou minha vida! Em 6 meses perdi 15kg de gordura e ganhei massa muscular. Os treinadores são incríveis e a estrutura é de primeira.</p>
+                <div class="testimonial-author">
+                    <div class="testimonial-author-image">
+                        <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" alt="Cliente 1">
+                    </div>
+                    <div class="testimonial-author-info">
+                        <h4 class="testimonial-author-name">Juliana Santos</h4>
+                        <p class="testimonial-author-role">Aluna há 1 ano</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="testimonial-slide">
+                <p class="testimonial-quote">Nunca me senti tão motivado a treinar! A energia da Academia Elite é contagiante e os resultados falam por si só. Recomendo para todos que levam fitness a sério.</p>
+                <div class="testimonial-author">
+                    <div class="testimonial-author-image">
+                        <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" alt="Cliente 2">
+                    </div>
+                    <div class="testimonial-author-info">
+                        <h4 class="testimonial-author-name">Ricardo Oliveira</h4>
+                        <p class="testimonial-author-role">Aluno há 8 meses</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="testimonial-slide">
+                <p class="testimonial-quote">Como atleta profissional, exijo o melhor do meu treino. Na Academia Elite encontrei equipamentos de qualidade e treinadores que entendem das minhas necessidades específicas.</p>
+                <div class="testimonial-author">
+                    <div class="testimonial-author-image">
+                        <img src="https://images.unsplash.com/photo-1542178243-bc20204b769f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" alt="Cliente 3">
+                    </div>
+                    <div class="testimonial-author-info">
+                        <h4 class="testimonial-author-name">Fernanda Lima</h4>
+                        <p class="testimonial-author-role">Atleta profissional</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="testimonial-nav">
+            <div class="testimonial-dot active" data-slide="0"></div>
+            <div class="testimonial-dot" data-slide="1"></div>
+            <div class="testimonial-dot" data-slide="2"></div>
+        </div>
+    </section>
+    
+    <!-- Seção de Contato -->
+    <section class="contact" id="contact">
+        <div class="contact-container">
+            <div class="contact-info">
+                <h2 class="contact-title">PRONTO PARA TRANSFORMAR SEU CORPO?</h2>
+                <p class="contact-text">Entre em contato conosco para agendar uma visita ou tirar suas dúvidas. Nossa equipe está pronta para te ajudar a começar sua jornada fitness.</p>
+                
+                <div class="contact-details">
+                    <div class="contact-item">
+                        <div class="contact-icon">📞</div>
+                        <div>
+                            <p class="contact-label">Telefone</p>
+                            <p class="contact-value">(11) 9999-9999</p>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-item">
+                        <div class="contact-icon">✉️</div>
+                        <div>
+                            <p class="contact-label">Email</p>
+                            <p class="contact-value">contato@academiaelite.com</p>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-item">
+                        <div class="contact-icon">📍</div>
+                        <div>
+                            <p class="contact-label">Endereço</p>
+                            <p class="contact-value">Av. Paulista, 1000 - São Paulo, SP</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <form class="contact-form">
+                <div class="form-group">
+                    <label for="name" class="form-label">Nome</label>
+                    <input type="text" id="name" class="form-input" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="email" class="form-label">Email</label>
+                    <input type="email" id="email" class="form-input" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="phone" class="form-label">Telefone</label>
+                    <input type="tel" id="phone" class="form-input" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="message" class="form-label">Mensagem</label>
+                    <textarea id="message" class="form-textarea" required></textarea>
+                </div>
+                
+                <button type="submit" class="form-button">ENVIAR MENSAGEM</button>
+            </form>
+        </div>
+    </section>
+    
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-col">
+                <a href="#" class="footer-logo">ACADEMIA ELITE</a>
+                <p class="footer-text">Transformando vidas através do fitness com excelência, tecnologia e paixão.</p>
+                <div class="footer-social">
+                    <a href="#" class="footer-social-icon">📱</a>
+                    <a href="#" class="footer-social-icon">📘</a>
+                    <a href="#" class="footer-social-icon">📸</a>
+                    <a href="#" class="footer-social-icon">🎥</a>
+                </div>
+            </div>
+            
+            <div class="footer-col">
+                <h3 class="footer-title">Links Rápidos</h3>
+                <div class="footer-links">
+                    <a href="#" class="footer-link">Início</a>
+                    <a href="#services" class="footer-link">Serviços</a>
+                    <a href="#trainers" class="footer-link">Treinadores</a>
+                    <a href="#testimonials" class="footer-link">Depoimentos</a>
+                    <a href="#contact" class="footer-link">Contato</a>
+                </div>
+            </div>
+            
+            <div class="footer-col">
+                <h3 class="footer-title">Serviços</h3>
+                <div class="footer-links">
+                    <a href="#" class="footer-link">Musculação</a>
+                    <a href="#" class="footer-link">CrossFit</a>
+                    <a href="#" class="footer-link">Yoga</a>
+                    <a href="#" class="footer-link">Personal Trainer</a>
+                    <a href="#" class="footer-link">Nutrição</a>
+                </div>
+            </div>
+            
+            <div class="footer-col">
+                <h3 class="footer-title">Newsletter</h3>
+                <p class="footer-text">Assine nossa newsletter para receber dicas de treino e promoções exclusivas.</p>
+                <form class="footer-newsletter-form">
+                    <input type="email" placeholder="Seu email" class="footer-newsletter-input" required>
+                    <button type="submit" class="footer-newsletter-button">OK</button>
+                </form>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <p>&copy; 2023 Academia Elite. Todos os direitos reservados.</p>
+        </div>
+    </footer>
+    
+    <!-- Efeitos de Cursor -->
+    <div class="cursor"></div>
+    <div class="cursor-follower"></div>
+    
+    <script>
+        // Navbar Scroll Effect
+        window.addEventListener('scroll', function() {
+            const navbar = document.querySelector('.navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+        
+        // Mobile Menu Toggle
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const navLinks = document.getElementById('navLinks');
+        
+        mobileMenuBtn.addEventListener('click', function() {
+            navLinks.classList.toggle('active');
+            mobileMenuBtn.textContent = navLinks.classList.contains('active') ? '✕' : '☰';
+        });
+        
+        // Smooth Scrolling for Anchor Links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                if (this.getAttribute('href') === '#') return;
+                
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    window.scrollTo({
+                        top: target.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                    
+                    // Close mobile menu if open
+                    if (navLinks.classList.contains('active')) {
+                        navLinks.classList.remove('active');
+                        mobileMenuBtn.textContent = '☰';
+                    }
+                }
+            });
+        });
+        
+        // Testimonial Slider
+        const testimonialSlides = document.querySelectorAll('.testimonial-slide');
+        const testimonialDots = document.querySelectorAll('.testimonial-dot');
+        let currentSlide = 0;
+        
+        function showSlide(index) {
+            testimonialSlides.forEach(slide => slide.classList.remove('active'));
+            testimonialDots.forEach(dot => dot.classList.remove('active'));
+            
+            testimonialSlides[index].classList.add('active');
+            testimonialDots[index].classList.add('active');
+            currentSlide = index;
+        }
+        
+        testimonialDots.forEach((dot, index) => {
+            dot.addEventListener('click', () => showSlide(index));
+        });
+        
+        // Auto slide change
+        setInterval(() => {
+            currentSlide = (currentSlide + 1) % testimonialSlides.length;
+            showSlide(currentSlide);
+        }, 5000);
+        
+        // Custom Cursor Effect
+        const cursor = document.querySelector('.cursor');
+        const cursorFollower = document.querySelector('.cursor-follower');
+        
+        document.addEventListener('mousemove', (e) => {
+            cursor.style.left = e.clientX + 'px';
+            cursor.style.top = e.clientY + 'px';
+            
+            setTimeout(() => {
+                cursorFollower.style.left = e.clientX + 'px';
+                cursorFollower.style.top = e.clientY + 'px';
+            }, 100);
+        });
+        
+        // Cursor effects on hover
+        const hoverElements = document.querySelectorAll('a, button, .trainer-card, .service-card, .highlight-card, .nav-link, .dropdown-link');
+        
+        hoverElements.forEach(element => {
+            element.addEventListener('mouseenter', () => {
+                cursor.style.transform = 'translate(-50%, -50%) scale(1.5)';
+                cursor.style.opacity = '0.3';
+                cursorFollower.style.transform = 'translate(-50%, -50%) scale(0.5)';
+            });
+            
+            element.addEventListener('mouseleave', () => {
+                cursor.style.transform = 'translate(-50%, -50%) scale(1)';
+                cursor.style.opacity = '0.5';
+                cursorFollower.style.transform = 'translate(-50%, -50%) scale(1)';
+            });
+        });
+        
+        // Animate elements when they come into view
+        const animateOnScroll = function() {
+            const elements = document.querySelectorAll('.highlight-card, .service-card, .trainer-card, .contact-info, .contact-form');
+            
+            elements.forEach(element => {
+                const elementPosition = element.getBoundingClientRect().top;
+                const windowHeight = window.innerHeight;
+                
+                if (elementPosition < windowHeight - 100) {
+                    element.style.animationPlayState = 'running';
+                }
+            });
+        };
+        
+        window.addEventListener('scroll', animateOnScroll);
+        window.addEventListener('load', animateOnScroll);
+    </script>
+</body>
+</html>
